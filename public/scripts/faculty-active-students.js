@@ -1,0 +1,74 @@
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadCourses();
+});
+
+async function loadCourses() {
+  try {
+    let faculty = await fetch('http://localhost:3500/faculty');
+    let students = await fetch('http://localhost:3500/student');
+    let courses = await fetch('http://localhost:3500/course');
+
+    courses = await courses.json();
+    faculty = await faculty.json();
+    students = await students.json();
+    courses = courses.courses;
+    faculty = faculty.faculty;
+    students = students.students;
+    let facultyCourses = faculty.courses;
+    const facultyID = faculty._id;
+    facultyCourses = courses.filter(course => facultyCourses.includes(course._id.toString()));
+    let courseList = [];
+    facultyCourses.forEach(course => {
+      let temp = { 'name': course.name, 'students': [] };
+      students.forEach(student => {
+        student.currentCourses.forEach(c => {
+          if (c.faculty == facultyID && c.course == course._id) {
+            temp.students.push(student);
+          }
+        });
+      });
+      courseList.push(temp);
+    });
+    renderdata(courseList);
+  } catch (err) {
+    console.error("Error loading data", err);
+  }
+}
+
+function renderdata(courseList) {
+  const container = document.getElementById("cards-container");
+  container.innerHTML = ""; // Clear previous content
+
+  if (!courseList.length) {
+    // text should be white
+    container.innerHTML += `<p class="text-muted">No active students</p>`;
+    return;
+  }
+
+  courseList.forEach(course => {
+    const div = document.createElement('div');
+    div.className = 'card mb-4 shadow-sm rounded';
+
+    const innerdiv1 = document.createElement('div');
+    innerdiv1.className = 'card-header bg-dark text-white rounded';
+    innerdiv1.innerHTML = `<h6 class="mb-0">${course.name}</h6>`;
+    div.appendChild(innerdiv1);
+
+    const innerdiv2 = document.createElement('div');
+    innerdiv2.className = 'card-body';
+
+    if (course.students.length === 0) {
+      innerdiv2.innerHTML = `<p class="text-muted">No students enrolled</p>`;
+    } else {
+      course.students.forEach(student => {
+        const studentDiv = document.createElement('div');
+        studentDiv.className = 'student';
+        studentDiv.innerHTML = `<strong>${student.name}</strong> <span>${student.rollNo}</span>`;
+        innerdiv2.appendChild(studentDiv);
+      });
+    }
+
+    div.appendChild(innerdiv2); // always append the body
+    container.appendChild(div);
+  });
+}

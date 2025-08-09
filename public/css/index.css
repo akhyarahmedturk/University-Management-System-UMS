@@ -1,0 +1,78 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-image: url('/img/campus.jpg');
+    /* your blurred background */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.login-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+h3,label{
+    color: #ffffff;
+}
+
+.container {
+    background-color: rgba(79, 70, 70, 0.7);
+    backdrop-filter: blur(6px);
+    padding: 2rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 450px;
+}
+
+.nav-tabs .nav-link {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #242424;
+    color: white;
+    border: none;
+}
+
+.form-label {
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: #464646;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #030303;
+}
+
+.login-footer a {
+    font-size: 0.9rem;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 576px) {
+    .login-container {
+        padding: 1.5rem;
+    }
+}
+
+.form-label {
+    font-weight: bold;
+}
