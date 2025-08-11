@@ -32,12 +32,12 @@ async function handle_login(req, res) {
             process.env.ACCESS_TOKEN_SECRET,
             { 'expiresIn': '1h' }
         );
-        const refresh_token = jwt.sign(
-            { "_id": found_user._id, role: found_user.role },
-            process.env.REFRESH_TOKEN_SECRET,
-            { 'expiresIn': '1d' }
-        );
-        found_user.refreshToken = refresh_token;
+        // const refresh_token = jwt.sign(
+        //     { "_id": found_user._id, role: found_user.role },
+        //     process.env.REFRESH_TOKEN_SECRET,
+        //     { 'expiresIn': '1d' }
+        // );
+        // found_user.refreshToken = refresh_token;
         await found_user.save();
         res.cookie('jwt', accessToken, { httpOnly: true, maxAge: 1 * 60 * 60 * 1000 });// 1 hour
         res.json({ success: true });
