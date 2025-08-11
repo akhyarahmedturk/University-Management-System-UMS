@@ -4,9 +4,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function loadCourses() {
   try {
-    let faculty = await fetch('http://localhost:3500/faculty');
-    let students = await fetch('http://localhost:3500/student');
-    let courses = await fetch('http://localhost:3500/course');
+    let faculty = await fetch('https://university-management-system-ums-production.up.railway.app/faculty');
+    let students = await fetch('https://university-management-system-ums-production.up.railway.app/student');
+    let courses = await fetch('https://university-management-system-ums-production.up.railway.app/course');
 
     courses = await courses.json();
     faculty = await faculty.json();

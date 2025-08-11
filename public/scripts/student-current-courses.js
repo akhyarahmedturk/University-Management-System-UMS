@@ -2,9 +2,9 @@ const courseList = document.getElementById("course-list");
 
 async function loadCourses() {
     try {
-        const coursesRes = await fetch('http://localhost:3500/course');
-        const currentCoursesRes = await fetch('http://localhost:3500/student/currentCourses');
-        let facultiesRes = await fetch('http://localhost:3500/faculty/faculties');
+        const coursesRes = await fetch('https://university-management-system-ums-production.up.railway.app/course');
+        const currentCoursesRes = await fetch('https://university-management-system-ums-production.up.railway.app/student/currentCourses');
+        let facultiesRes = await fetch('https://university-management-system-ums-production.up.railway.app/faculty/faculties');
 
         if (!coursesRes.ok || !currentCoursesRes.ok || !facultiesRes.ok) {
             throw new Error('Failed to fetch course data');

@@ -3,8 +3,8 @@ let noOfCurrentCourses = 0;
 
 async function loadCourses() {
     try {
-        const coursesRes = await fetch('http://localhost:3500/course');
-        const currentCoursesRes = await fetch('http://localhost:3500/student/currentCourses');
+        const coursesRes = await fetch('https://university-management-system-ums-production.up.railway.app/course');
+        const currentCoursesRes = await fetch('https://university-management-system-ums-production.up.railway.app/student/currentCourses');
 
         if (!coursesRes.ok || !currentCoursesRes.ok) {
             throw new Error('Failed to fetch course data');
@@ -29,7 +29,7 @@ async function loadCourses() {
 };
 
 async function renderCourses(courses) {
-    let faculties = await fetch('http://localhost:3500/faculty/faculties');
+    let faculties = await fetch('https://university-management-system-ums-production.up.railway.app/faculty/faculties');
     faculties = await faculties.json();
     faculties = faculties.faculty;
     if (courses.length === 0) {

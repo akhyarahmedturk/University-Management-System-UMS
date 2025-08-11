@@ -114,7 +114,7 @@ document.getElementById("saveUpdateBtn").addEventListener("click", async (e) => 
     }
 });
 async function updateData(updatedInfo) {
-    const res = await fetch(`http://localhost:3500/course`, {
+    const res = await fetch(`https://university-management-system-ums-production.up.railway.app/course`, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedInfo)
@@ -124,7 +124,7 @@ async function updateData(updatedInfo) {
 
 async function loadCourses() {
     try {
-        const res = await fetch('http://localhost:3500/course');
+        const res = await fetch('https://university-management-system-ums-production.up.railway.app/course');
         const data = await res.json();
         courses = data.courses;
         departments = [...new Set(courses.map(course => course.code.split('-')[0]))];
@@ -142,7 +142,7 @@ async function loadCourses() {
 
 async function loadFaculties() {
     try {
-        const res = await fetch('http://localhost:3500/faculty/faculties');
+        const res = await fetch('https://university-management-system-ums-production.up.railway.app/faculty/faculties');
         const data = await res.json();
         faculties = data.faculty;
         faculties = faculties.filter(faculty => (faculty.courses && faculty.courses.length > 0));

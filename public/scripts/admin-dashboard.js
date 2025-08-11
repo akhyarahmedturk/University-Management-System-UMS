@@ -1,4 +1,4 @@
 document.getElementById('logout').addEventListener('click', async () => {
-    fetch('http://localhost:3500/logout');
+    fetch('https://university-management-system-ums-production.up.railway.app/logout');
     window.location.href = '/index.html?type=admin';
 })

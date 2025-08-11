@@ -2,8 +2,8 @@ const courseList = document.getElementById("course-list");
 
 async function loadCourses() {
     try {
-        const coursesRes = await fetch('http://localhost:3500/course');
-        const studentRes = await fetch('http://localhost:3500/student/profile');
+        const coursesRes = await fetch('https://university-management-system-ums-production.up.railway.app/course');
+        const studentRes = await fetch('https://university-management-system-ums-production.up.railway.app/student/profile');
         if (!coursesRes.ok || !studentRes.ok) {
             throw new Error('Failed to fetch data');
         }

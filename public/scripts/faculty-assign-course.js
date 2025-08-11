@@ -6,8 +6,8 @@ let noOfCurrentCourses = 0;
 
 async function loadCourses() {
     try {
-        const currentRes = await fetch('http://localhost:3500/faculty/courses');
-        const coursesRes = await fetch('http://localhost:3500/course');
+        const currentRes = await fetch('https://university-management-system-ums-production.up.railway.app/faculty/courses');
+        const coursesRes = await fetch('https://university-management-system-ums-production.up.railway.app/course');
 
         let currentCourses = await currentRes.json();
         let courses = await coursesRes.json();

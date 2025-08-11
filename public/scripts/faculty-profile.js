@@ -5,7 +5,7 @@ document.getElementById('toggle-password-section').addEventListener('click', () 
 // Fetch and populate faculty data
 async function loadProfile() {
     try {
-        const res = await fetch('http://localhost:3500/faculty');
+        const res = await fetch('https://university-management-system-ums-production.up.railway.app/faculty');
         let faculty = await res.json();
         faculty = faculty.faculty || {};
         document.getElementById('name').textContent = faculty.name || '';
@@ -28,7 +28,7 @@ document.getElementById('change-password').addEventListener('click', async (e) =
         return;
     }
     try {
-        const res = await fetch('http://localhost:3500/faculty/updatePassword', {
+        const res = await fetch('https://university-management-system-ums-production.up.railway.app/faculty/updatePassword', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatedData)

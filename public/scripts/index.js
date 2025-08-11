@@ -61,7 +61,7 @@ async function handleLogin(e, role, email, password) {
     };
 
     try {
-        const res = await fetch('http://localhost:3500/auth', {
+        const res = await fetch('https://university-management-system-ums-production.up.railway.app/auth', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)

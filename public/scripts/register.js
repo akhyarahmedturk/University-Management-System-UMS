@@ -36,7 +36,7 @@ async function handleStudentRegistration(e) {
         role: ROLES.STUDENT
     };
 
-    const res = await fetch('http://localhost:3500/register', {
+    const res = await fetch('https://university-management-system-ums-production.up.railway.app/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -63,7 +63,7 @@ async function handleFacultyRegistration(e) {
         designation: form.designation.value,
         role: ROLES.FACULTY
     };
-    const res = await fetch('http://localhost:3500/register', {
+    const res = await fetch('https://university-management-system-ums-production.up.railway.app/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
