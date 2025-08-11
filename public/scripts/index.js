@@ -69,7 +69,7 @@ async function handleLogin(e, role, email, password) {
 
         if (res.ok) {
             if (role === ROLES.STUDENT) window.location.href = '/protected/student-dashboard.html';
-            else if (role === ROLES.ADMIN) window.location.href= '/protected/admin.html';
+            else if (role === ROLES.ADMIN) window.location.href= '/protected/admin-dashboard.html';
             else if (role === ROLES.FACULTY) window.location.href= '/protected/faculty-dashboard.html';
             else window.location.href = `/index.html`;
         }

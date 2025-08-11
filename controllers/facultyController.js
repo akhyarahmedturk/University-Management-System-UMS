@@ -138,6 +138,26 @@ async function getFaculty(req, res) {
     res.json({ "faculty": data });
 }
 
+async function updateFacultyProfile(req, res) {
+    const facultyID = req.body.facultyID;
+    const faculty = await Faculty.findOne({ _id: facultyID });
+    if (!faculty) return res.status(400).json({ message: "Faculty does not exist!" });
+    let duplicate;
+    if(req.body.email && req.body.email !== faculty.email) duplicate = duplicate || await Faculty.findOne({ email: req.body.email });
+
+    if(duplicate) return res.status(409).json({ message: "Faculty with this email already exists!" });
+
+    if (req.body.name) faculty.name = req.body.name;
+    if (req.body.designation) faculty.designation = req.body.designation;
+    if (req.body.email) faculty.email = req.body.email;
+    if (req.body.password) {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        faculty.password = hashedPassword;
+    }
+    await faculty.save();
+    res.json({ "faculty": faculty });
+}
+
 async function updatePassword(req, res) {
     const facultyID = req.body.facultyID;
     const faculty = await Faculty.findOne({ _id: facultyID });
@@ -166,5 +186,6 @@ module.exports = {
     getFaculties,
     getCourses,
     updatePassword,
-    getFaculty
+    getFaculty,
+    updateFacultyProfile
 };

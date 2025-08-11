@@ -3,6 +3,7 @@ const Course = require('../model/Course');
 const Student = require('../model/Student');
 const Faculty = require('../model/Faculty');
 const bcrypt = require('bcrypt');
+const ROLES = require('../config/roleList');
 const ObjectId = mongoose.Types.ObjectId;
 
 async function addCourse(req, res) {
@@ -96,14 +97,22 @@ async function updateStudentProfile(req, res) {
     const studentID = req.body.studentID;
     const student = await Student.findOne({ _id: studentID });
     if (!student) return res.status(400).json({ message: "Student does not exist!" });
+    let duplicate;
+    if(req.body.rollNo && req.body.rollNo !== student.rollNo) duplicate = duplicate || await Student.findOne({ rollNo: req.body.rollNo });
+    if(req.body.email && req.body.email !== student.email) duplicate = duplicate || await Student.findOne({ email: req.body.email });
+
+    if(duplicate) return res.status(409).json({ message: "Student with this roll number or email already exists!" });
+
     if (req.body.name) student.name = req.body.name;
     if (req.body.department) student.department = req.body.department;
     if (req.body.rollNo) student.rollNo = req.body.rollNo;
     if (req.body.semester) student.semester = req.body.semester;
     if (req.body.email) student.email = req.body.email;
     if (req.body.cgpa) student.cgpa = req.body.cgpa;
-    if (req.body.currentCourses) student.currentCourses = req.body.currentCourses;
-    if (req.body.passedCourses) student.passedCourses = req.body.passedCourses;
+    if (req.body.password) {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        student.password = hashedPassword;
+    }
     await student.save();
     res.json({ "student": student });
 }
@@ -155,7 +164,7 @@ async function updateCGPA(studentID) {
         }
     }
     const newCGPA = count > 0 ? (sum / count) : null;
-    student.cgpa = Number(newCGPA.toFixed(2)); // 2 decimal places optional
+    student.cgpa = newCGPA ? Number(newCGPA.toFixed(2)) : null; // 2 decimal places optional
     await student.save();
 }
 

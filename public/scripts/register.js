@@ -48,7 +48,8 @@ async function handleStudentRegistration(e) {
         window.location.href = '/index.html?type=student';
         // form.style.display = 'none';
     } else {
-        alert('Registration failed.');
+        const errorData = await res.json(); 
+        alert('Registration failed, error: ' + errorData.message);
     }
 }
 

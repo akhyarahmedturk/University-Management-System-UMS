@@ -5,7 +5,7 @@ const ROLES = require('../config/roleList');
 
 const ROLE_MAP = {
     student: ['student-dashboard.html', 'student-academic-history.html', 'student-profile.html', 'student-enroll.html', 'student-courses.html'],
-    admin: ['admin.html'],
+    admin: ['admin-dashboard.html', 'admin-manage-students.html', 'admin-statistics.html', 'admin-manage-courses.html', 'admin-manage-faculty.html'],
     faculty: ['faculty-dashboard.html', 'faculty-assign-course.html', 'faculty-profile.html', 'faculty-active-students.html', 'faculty-assign-grades.html']
 };
 

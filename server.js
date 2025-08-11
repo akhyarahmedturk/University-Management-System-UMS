@@ -22,10 +22,10 @@ app.use(cors({
     credentials: true,
 }));
 
-app.use((req, res, next) => {
-    res.set('Cache-Control', 'no-store');
-    next();
-});
+// app.use((req, res, next) => {
+//     res.set('Cache-Control', 'no-store');
+//     next();
+// });
 
 
 app.use(express.json());

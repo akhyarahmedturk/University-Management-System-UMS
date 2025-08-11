@@ -57,7 +57,6 @@ async function renderCourses(courses) {
             `<option value="${faculty._id}">${faculty.name} (${faculty.designation})</option>`
         ).join('')}
                 </select>
-
                 <button class="btn btn-success enroll-btn" data-course="${course._id}">Enroll</button>
             </div>
         `;

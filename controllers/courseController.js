@@ -29,6 +29,8 @@ async function createCourse(req, res) {
     const duplicate = await Course.findOne({ code });
     if (duplicate) return res.status(409).json({ message: "This course already exist's!" });
     try {
+        //make ch integer
+        if(ch) ch = parseInt(ch);
         const newCourse = await Course.create({
             name, code, ch
         });
@@ -41,14 +43,23 @@ async function createCourse(req, res) {
 
 
 async function updateCourse(req, res) {
-    const code = req.params.id;
-    const course = await Course.findOne({ code });
+    const courseID = req.body.courseID;
+    const course = await Course.findOne({ _id:courseID });
     if (!course) {
         return res.status(404).json({ message: "Course not found" });
     }
-    if (req.name) course.name = req.body.name;
-    if (req.ch) course.ch = req.body.ch;
-
+    let duplicate;
+    if(req.body.code && req.body.code !== course.code) {
+        duplicate = await Course.findOne({ code: req.body.code });
+        if (duplicate) {
+            return res.status(409).json({ message: "Course code already exists" });
+        }
+        course.code = req.body.code;
+    }
+    if (req.body.name) course.name = req.body.name;
+    if (req.body.ch) {
+        course.ch = parseInt(req.body.ch);
+    }
     await course.save();
     res.status(200).json(course);
 }
