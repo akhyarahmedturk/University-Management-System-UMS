@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+app.set('trust proxy', 1);// for railway
 const path = require('path');
 const cors = require('cors');
 // const verify_jwt = require('./middleware/verify_JWT');
